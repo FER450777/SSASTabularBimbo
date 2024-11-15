@@ -1,0 +1,319 @@
+{
+  "name": "SemanticModel",
+  "compatibilityLevel": 1600,
+  "model": {
+    "culture": "en-US",
+    "dataSources": [
+      {
+        "type": "structured",
+        "name": "SQL/localhost;DimencionesPanPlus",
+        "connectionDetails": {
+          "protocol": "tds",
+          "address": {
+            "server": "localhost",
+            "database": "DimencionesPanPlus"
+          },
+          "authentication": null,
+          "query": null
+        },
+        "credential": {
+          "AuthenticationKind": "Windows",
+          "kind": "SQL",
+          "path": "localhost;DimencionesPanPlus",
+          "Username": "ferna",
+          "EncryptConnection": false
+        }
+      }
+    ],
+    "tables": [
+      {
+        "name": "TAB_SGV ViewClientes",
+        "columns": [
+          {
+            "name": "Cliente Key",
+            "dataType": "int64",
+            "sourceColumn": "Cliente Key"
+          },
+          {
+            "name": "Nombre Cliente",
+            "dataType": "string",
+            "sourceColumn": "Nombre Cliente"
+          },
+          {
+            "name": "Tipo Cliente",
+            "dataType": "string",
+            "sourceColumn": "Tipo Cliente"
+          },
+          {
+            "name": "Contacto Cliente",
+            "dataType": "string",
+            "sourceColumn": "Contacto Cliente"
+          },
+          {
+            "name": "Ubicacion Cliente",
+            "dataType": "string",
+            "sourceColumn": "Ubicacion Cliente"
+          },
+          {
+            "name": "Departamento Cliente",
+            "dataType": "string",
+            "sourceColumn": "Departamento Cliente"
+          },
+          {
+            "name": "Municipio Cliente",
+            "dataType": "string",
+            "sourceColumn": "Municipio Cliente"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/localhost;DimencionesPanPlus\",",
+                "    TAB_SGV_ViewClientes = Source{[Schema=\"TAB_SGV\",Item=\"ViewClientes\"]}[Data]",
+                "in",
+                "    TAB_SGV_ViewClientes"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "TAB_SGV ViewDate",
+        "columns": [
+          {
+            "name": "Date Key",
+            "dataType": "int64",
+            "sourceColumn": "Date Key"
+          },
+          {
+            "name": "Fecha",
+            "dataType": "dateTime",
+            "sourceColumn": "Fecha"
+          },
+          {
+            "name": "Dia",
+            "dataType": "int64",
+            "sourceColumn": "Dia"
+          },
+          {
+            "name": "Dia del anio",
+            "dataType": "int64",
+            "sourceColumn": "Dia del anio"
+          },
+          {
+            "name": "Fin de semana",
+            "dataType": "boolean",
+            "sourceColumn": "Fin de semana"
+          },
+          {
+            "name": "Mes",
+            "dataType": "int64",
+            "sourceColumn": "Mes"
+          },
+          {
+            "name": "Nombre del mes",
+            "dataType": "string",
+            "sourceColumn": "Nombre del mes"
+          },
+          {
+            "name": "Semana del mes",
+            "dataType": "int64",
+            "sourceColumn": "Semana del mes"
+          },
+          {
+            "name": "Nombre del dia",
+            "dataType": "string",
+            "sourceColumn": "Nombre del dia"
+          },
+          {
+            "name": "Anio",
+            "dataType": "int64",
+            "sourceColumn": "Anio"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/localhost;DimencionesPanPlus\",",
+                "    TAB_SGV_ViewDate = Source{[Schema=\"TAB_SGV\",Item=\"ViewDate\"]}[Data]",
+                "in",
+                "    TAB_SGV_ViewDate"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "TAB_SGV ViewHVentas",
+        "columns": [
+          {
+            "name": "Sale Key",
+            "dataType": "int64",
+            "sourceColumn": "Sale Key"
+          },
+          {
+            "name": "Date Key",
+            "dataType": "int64",
+            "sourceColumn": "Date Key"
+          },
+          {
+            "name": "Cliente Key",
+            "dataType": "int64",
+            "sourceColumn": "Cliente Key"
+          },
+          {
+            "name": "Producto Key",
+            "dataType": "int64",
+            "sourceColumn": "Producto Key"
+          },
+          {
+            "name": "Cantidad Venta",
+            "dataType": "int64",
+            "sourceColumn": "Cantidad Venta"
+          },
+          {
+            "name": "Precio Unitario",
+            "dataType": "double",
+            "sourceColumn": "Precio Unitario"
+          },
+          {
+            "name": "Venta Total",
+            "dataType": "double",
+            "sourceColumn": "Venta Total"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/localhost;DimencionesPanPlus\",",
+                "    TAB_SGV_ViewHVentas = Source{[Schema=\"TAB_SGV\",Item=\"ViewHVentas\"]}[Data]",
+                "in",
+                "    TAB_SGV_ViewHVentas"
+              ]
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": "Ventas totales",
+            "expression": "SUM([Venta Total])"
+          },
+          {
+            "name": "Precios unitarios",
+            "expression": "SUM([Precio Unitario])"
+          },
+          {
+            "name": "Cantidad ventas",
+            "expression": "SUM([Cantidad Venta])"
+          }
+        ]
+      },
+      {
+        "name": "TAB_SGV ViewProductos",
+        "columns": [
+          {
+            "name": "Producto Key",
+            "dataType": "int64",
+            "sourceColumn": "Producto Key"
+          },
+          {
+            "name": "Nombre Producto",
+            "dataType": "string",
+            "sourceColumn": "Nombre Producto"
+          },
+          {
+            "name": "Descripcion Producto",
+            "dataType": "string",
+            "sourceColumn": "Descripcion Producto"
+          },
+          {
+            "name": "Precio Producto",
+            "dataType": "string",
+            "sourceColumn": "Precio Producto"
+          },
+          {
+            "name": "Categoria Producto",
+            "dataType": "string",
+            "sourceColumn": "Categoria Producto"
+          },
+          {
+            "name": "Nombre Proveedor",
+            "dataType": "string",
+            "sourceColumn": "Nombre Proveedor"
+          },
+          {
+            "name": "Contacto Proveedor",
+            "dataType": "string",
+            "sourceColumn": "Contacto Proveedor"
+          },
+          {
+            "name": "Ubicacion Proveedor",
+            "dataType": "string",
+            "sourceColumn": "Ubicacion Proveedor"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/localhost;DimencionesPanPlus\",",
+                "    TAB_SGV_ViewProductos = Source{[Schema=\"TAB_SGV\",Item=\"ViewProductos\"]}[Data]",
+                "in",
+                "    TAB_SGV_ViewProductos"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "relationships": [
+      {
+        "name": "a63b6513-cdab-4a2b-b0c6-ea39e1a11f1f",
+        "fromTable": "TAB_SGV ViewHVentas",
+        "fromColumn": "Producto Key",
+        "toTable": "TAB_SGV ViewProductos",
+        "toColumn": "Producto Key"
+      },
+      {
+        "name": "63e1058b-106c-4331-80ee-05aa36f006b4",
+        "fromTable": "TAB_SGV ViewHVentas",
+        "fromColumn": "Cliente Key",
+        "toTable": "TAB_SGV ViewClientes",
+        "toColumn": "Cliente Key"
+      },
+      {
+        "name": "b5779a3d-9d73-4718-8312-9b13340d9df3",
+        "fromTable": "TAB_SGV ViewHVentas",
+        "fromColumn": "Date Key",
+        "toTable": "TAB_SGV ViewDate",
+        "toColumn": "Date Key"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "ClientCompatibilityLevel",
+        "value": "700"
+      }
+    ]
+  },
+  "id": "SemanticModel"
+}
